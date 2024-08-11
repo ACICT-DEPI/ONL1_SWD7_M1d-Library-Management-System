@@ -1,5 +1,5 @@
 # git commands used
-git clone <the repo link> => to download the repo <br>
+git clone the-repo-link => to download the repo <br>
 git pull => to get any update from the remote repo<br>
 -- to upload your work<br>
 1- git add .<br>
