@@ -1,12 +1,13 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class library {
     // this class represents every branch
     private final int id;
     public String branchName;
-
+    private List<Contents> contentsList;
     // Constructor
     public library(int id) {
         this.id = id;
