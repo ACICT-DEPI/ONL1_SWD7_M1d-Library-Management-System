@@ -3,13 +3,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class library {
+public class Library {
     // this class represents every branch
     private final int id;
     public String branchName;
     private List<Contents> contentsList;
     // Constructor
-    public library(int id) {
+    public Library(int id) {
         this.id = id;
         this.branchName = "";
     }
@@ -27,6 +27,14 @@ public class library {
     // Setter for the name
     public void setName(String name) {
         this.branchName = name;
+    }
+
+    public List<Contents> getContents () {
+        return this.contentsList;
+    }
+    public void addContent(Contents newContent) {
+        // add new content to the content list
+
     }
 
     // Method to save library data to a file
