@@ -1,8 +1,7 @@
 package Library;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
@@ -17,10 +16,23 @@ public class Library {
         this.saveLibraryToFile();
     }
 
-    static List<Library> loadAllBranches() {
-        List<Library> allBranches = null;
-        // load all branches from file
-        return allBranches;
+    public static List<Library> loadAllBranches() {
+        List<Library> branches = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("libs.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 2) {
+                    int id = Integer.parseInt(parts[0]);
+                    String name = parts[1];
+                    branches.add(new Library(id, name));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while loading library data.");
+        }
+        return branches;
     }
 
     // Getter for the id
