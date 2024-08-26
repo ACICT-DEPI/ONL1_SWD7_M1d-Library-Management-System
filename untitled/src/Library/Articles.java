@@ -1,5 +1,8 @@
-package javaapplication٥;
+package Library;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Articles extends Contents {
@@ -15,7 +18,17 @@ public class Articles extends Contents {
         this.journal = journal;
         this.publicationDate = publicationDate;
     }
-    
+
+    public void saveArticleToFile(String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("items.txt"))) {
+//            writer.write(article.toString());// add all data
+            writer.newLine(); // Move to the next line after each article
+            System.out.println("Articles have been successfully saved to " + filename);
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving articles to file: " + e.getMessage());
+        }
+    }
+
      //Getting for journal
     public String getJournal() {
         return journal;

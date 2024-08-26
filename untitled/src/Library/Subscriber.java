@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package librarymangementapp;
+package Library;
 import java.util.Date;
 
 /**
@@ -27,7 +27,19 @@ class Subscriber {
         this.setEmail(s_email);
         this.subscriptionStartDate = new Date();
     }
-  
+
+    public static boolean handleLogin() {
+        // prompt the user for username and password
+        // return true if exists false otherwise
+        return true;
+    }
+
+    public static boolean handleRegister() {
+        // prompt the user for username and password
+        // return true if exists false otherwise
+        return true;
+    }
+
     public int getId(){
         return id;
     }
@@ -46,7 +58,7 @@ class Subscriber {
         return name;
     }
     private void setName(String name){
-        if(name==null || "".equals(name)){
+        if(name==null || name.isEmpty()){
             System.out.println("invalid name");
         }else{
             this.name=name;
@@ -63,18 +75,18 @@ class Subscriber {
         return phone;
     }
     private void setPhone(String phone){
-        if(phone==null || "".equals(phone) || phone.length()<11){
+        if(phone==null || phone.length()<11){
             System.out.println("invalid phone number");
         }else{
             this.phone=phone;
         }
     }
     
-    public String getemail(){
+    public String getEmail(){
         return s_email;
     }
     private void setEmail(String s_email){
-       if(s_email==null || "".equals(s_email) || !(s_email.contains("@"))) {
+       if(s_email==null || !(s_email.contains("@"))) {
            System.out.println("Invalid email");
        }else{
            this.s_email=s_email;

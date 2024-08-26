@@ -1,15 +1,44 @@
+package Library;
+
 import java.util.Date;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // split this main to admin and user
-        String str = "";
+        String str;
         Scanner sc = new Scanner(System.in);
         System.out.print("Welcome to our library!\n");
+        List<Library> allBranches = Library.loadAllBranches();
         do {
+            System.out.println("Type what you want \n1 Login\n2 Register\n3 quit");
             str = sc.nextLine();
+            int choice = Character.getNumericValue(str.charAt(0));
+            switch (choice) {
+                case 1:
+                    // run the login function
+                    System.out.println("Login");
+                    if (Subscriber.handleLogin()) {
+                        System.out.println("Login successful");
+                    } else {
+                        System.out.println("Login unsuccessful\n try to register first " +
+                                "or make sure of your password");
+                    }
+                    break;
+                case 2:
+                    // run the register functions
+                    System.out.println("Register");
+                    if (Subscriber.handleRegister()) {
+                        System.out.println("Register successful\nlogin now");
+                    }
+                    break;
+                case 3:
+                    str = "quit";
+                    break;
+            }
         } while ("quit".compareTo(str) != 0);
+        System.out.println("Thanks for visiting our library");
     }
 }
 /*
@@ -30,7 +59,7 @@ public class Main {
         Subscriber subscriber = new Subscriber(type,name,address,phoneNumber,s_email);
         System.out.println("New subscriber created Id :"+subscriber.getId());
         
-        //subscrbtion strt date 
+        //subscription start date
         Date subscriptionStartDate = subscriber.getSubscriptionStartDate(); 
         System.out.println("Subscription start date: " + subscriptionStartDate);
         
