@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -14,22 +15,33 @@ public class Main {
 /*
     public static void main(String[] args) {
         //Subscriber
-        Scanner sc=new Scanner(System.in);
+        Scanner sc=new Scanner(System.in); 
         System.out.print("Enter subscriber name:");
         String name=sc.nextLine();
         System.out.print("Enter subscriber address:");
         String address=sc.nextLine();
         System.out.print("Enter subscriber phone number:");
         String phoneNumber=sc.nextLine();
-        System.out.print("Enter subscriber type (regular/golden):");
+        System.out.print("Enter subscriber email: ");
+        String s_email=sc.nextLine();
+        System.out.print("Enter subscriber type(regular/golden):");
         String type=sc.nextLine();
-
-        Subscriber subscriber = new Subscriber(getNextId(),type,name,address,phoneNumber);
-        System.out.println("New subscriber created:");
-        System.out.println(subscriber);
+      
+        Subscriber subscriber = new Subscriber(type,name,address,phoneNumber,s_email);
+        System.out.println("New subscriber created Id :"+subscriber.getId());
+        
+        //subscrbtion strt date 
+        Date subscriptionStartDate = subscriber.getSubscriptionStartDate(); 
+        System.out.println("Subscription start date: " + subscriptionStartDate);
+        
+        //borrow period
+        int borrowingPeriod=subscriber.getBorrowingPeriod();
+        if(borrowingPeriod == 3){
+            System.out.println("Borrowing period for"+" "+name+" : 3 months");
+        } 
+        else{
+            System.out.println("Borrowing period for"+" "+name+" : 3 weeks");
+        }
     }
-    private static int nextId = 1;
-    private static int getNextId() {
-        return nextId++;
-    }
+}
  */
