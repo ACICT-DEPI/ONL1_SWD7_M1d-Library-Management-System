@@ -9,20 +9,6 @@ public class UserMainPage implements LibraryView {
     public UserMainPage(List<Library> allBranches) {
         this.allBranches = allBranches;
     }
-    @Override
-    public void run() {
-
-    }
-
-    @Override
-    public void viewBooks() {
-
-    }
-
-    @Override
-    public void searchBook(String title) {
-
-    }
 
     @Override
     public void borrowBook(String bookId) {
@@ -41,7 +27,7 @@ public class UserMainPage implements LibraryView {
         System.out.println("2. Borrow a book");
         System.out.println("3. Return a book");
         System.out.println("4. Search for content");
-        System.out.println("5. Logout");
+        System.out.println("8. Logout");
     }
 
     @Override
@@ -62,7 +48,7 @@ public class UserMainPage implements LibraryView {
             case 4:
                 performSearch(sc);
                 break;
-            case 5:
+            case 8:
                 System.out.println("Logging out...");
                 break;
             default:
@@ -70,7 +56,7 @@ public class UserMainPage implements LibraryView {
         }
     }
 
-    private void performSearch(Scanner sc) {
+    public void performSearch(Scanner sc) {
         System.out.print("Enter search keyword: ");
         String keyword = sc.nextLine();
 

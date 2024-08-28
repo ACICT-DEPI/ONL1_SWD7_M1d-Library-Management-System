@@ -109,7 +109,7 @@ public class Main {
             option = sc.nextLine();
             int choice = Integer.parseInt(option);
             mainPage.handleSelection(sc, choice);
-        } while (!option.equals("4"));  // where 4 is the quit option
+        } while (!option.equals("8"));  // where 4 is the quit option
     }
 
     private boolean checkIfAdmin() {
