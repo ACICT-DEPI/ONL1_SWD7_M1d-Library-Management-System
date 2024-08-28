@@ -99,7 +99,7 @@ public class Main {
         if (isAdmin) {
             mainPage = new AdminMainPage();
         } else {
-            mainPage = new UserMainPage();
+            mainPage = new UserMainPage(allBranches);
         }
 
         String option;
