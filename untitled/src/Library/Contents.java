@@ -136,12 +136,15 @@ public abstract class Contents
         
     }
     
-    //If return, we will increase the number of copies
-    
      public void returnItem() 
      {
         copies++;
         status = "On shelf";
+    }
+
+    public boolean matches(String keyword) {
+//        return name.equalsIgnoreCase(keyword);
+        return true;
     }
     
 }

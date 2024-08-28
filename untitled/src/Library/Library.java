@@ -74,6 +74,8 @@ public class Library {
 //        }
 //    }
 
+
+
     // Getter for the id
     public int getId() {
         return id;
@@ -95,6 +97,16 @@ public class Library {
     public void addContent(Contents newContent) {
         // add new content to the content list
 
+    }
+
+    public List<Contents> search(String keyword) {
+        List<Contents> results = new ArrayList<>();
+        for (Contents content : contentsList) {
+            if (content.matches(keyword)) {  // Assuming Contents has a matches method
+                results.add(content);
+            }
+        }
+        return results;
     }
 
     // Method to save library data to a file

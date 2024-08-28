@@ -1,7 +1,6 @@
 package Library;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -10,10 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author Admin
- */
 class Subscriber {
     private static int nextId = 0; // TODO: fix the restart error
     private int id;
@@ -155,6 +150,7 @@ class Subscriber {
             return 0.0;
         }
     }
+
     //borrow method
     public void borrow(String bookName){
         LocalDate returnDate = calculateReturnDate();
@@ -168,6 +164,7 @@ class Subscriber {
             System.out.println("No late fees");
         }
     }
+
     // to read list
     public void addToReadList(String bookName){
         toReadList.add(bookName);
@@ -231,5 +228,20 @@ class Subscriber {
             System.out.println("An error occurred while loading subscriber data: " + e.getMessage());
         }
         return subscribers;
+    }
+
+    //method to send a reminder email before the due date
+    public void sendReminder() {
+        LocalDate returnDate = calculateReturnDate();
+        LocalDate reminderDate = returnDate.minusDays(3); //Send reminder 3 days before due date
+
+        if (LocalDate.now().isAfter(reminderDate) && LocalDate.now().isBefore(returnDate)) {
+            // Simulate sending an email
+            System.out.println("Reminder: Your borrowed book is due on " + returnDate + ". Please return it on time to avoid late fees.");
+            System.out.println("Sending reminder to " + s_email);
+            //integrate with an email API here
+        } else {
+            System.out.println("No reminder needed at this time.");
+        }
     }
 }

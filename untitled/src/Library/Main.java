@@ -23,7 +23,7 @@ public class Main {
             str = sc.nextLine();
             int choice = Character.getNumericValue(str.charAt(0));
             switch (choice) {
-                case 1:
+                case 1 -> {
                     // Login
                     if (libraryApp.handleLogin(sc)) {
                         System.out.println("Login successful");
@@ -31,18 +31,15 @@ public class Main {
                     } else {
                         System.out.println("Login unsuccessful. Try to register first or check your password.");
                     }
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     // Register
                     if (libraryApp.handleRegister(sc)) {
                         System.out.println("Register successful. Please login now.");
                     }
-                    break;
-                case 3:
-                    str = "quit";
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                }
+                case 3 -> str = "quit";
+                default -> System.out.println("Invalid option. Please try again.");
             }
         } while ("quit".compareTo(str) != 0);
         System.out.println("Thanks for visiting our library");
@@ -112,7 +109,7 @@ public class Main {
             option = sc.nextLine();
             int choice = Integer.parseInt(option);
             mainPage.handleSelection(sc, choice);
-        } while (!option.equals("4"));  // Assuming 4 is the logout option for both roles
+        } while (!option.equals("4"));  // where 4 is the quit option
     }
 
     private boolean checkIfAdmin() {
@@ -153,5 +150,36 @@ public class Main {
             System.out.println("Borrowing period for"+" "+name+" : 3 weeks");
         }
     }
+
+    // Options
+    private static void libraryOptions(Subscriber subscriber, Scanner sc) {
+        LocalDate subscriptionStartDate = subscriber.getSubscriptionStartDate();
+        System.out.println("Subscription start date: " + subscriptionStartDate);
+
+        // Borrowing period
+        int borrowingPeriod = subscriber.getBorrowingPeriod();
+        if (borrowingPeriod == 3) {
+            System.out.println("Borrowing period for " + subscriber.getName() + " : 3 months");
+        } else {
+            System.out.println("Borrowing period for " + subscriber.getName() + " : 3 weeks");
+        }
+
+        // To-read list
+        subscriber.toReadList();
+
+        System.out.println("Do you want to borrow a book? (yes/no)");
+        String borrowResponse = sc.nextLine();
+        if (borrowResponse.equalsIgnoreCase("yes")) {
+            System.out.println("Enter the name of the book you want to borrow: ");
+            String bookName = sc.nextLine();
+            subscriber.borrow(bookName);
+        } else {
+            System.out.println("No book borrowed.");
+        }
+
+        // Send reminder if due date is approaching
+        subscriber.sendReminder();
+    }
+
 }
  */
