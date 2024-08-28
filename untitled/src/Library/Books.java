@@ -15,10 +15,10 @@ public class Books extends Contents {
     }
 
     public void saveBookToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("items.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("items.csv"))) {
 //            writer.write(books[i].toString()); // save all data
             writer.newLine(); // Move to the next line after each book
-            System.out.println("Books have been successfully saved to items.txt");
+            System.out.println("Books have been successfully saved to items.csv");
         } catch (IOException e) {
             System.out.println("An error occurred while saving books to file: " + e.getMessage());
         }

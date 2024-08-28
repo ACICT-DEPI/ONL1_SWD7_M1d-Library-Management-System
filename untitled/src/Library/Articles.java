@@ -20,7 +20,7 @@ public class Articles extends Contents {
     }
 
     public void saveArticleToFile(String filename) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("items.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("items.csv"))) {
 //            writer.write(article.toString());// add all data
             writer.newLine(); // Move to the next line after each article
             System.out.println("Articles have been successfully saved to " + filename);

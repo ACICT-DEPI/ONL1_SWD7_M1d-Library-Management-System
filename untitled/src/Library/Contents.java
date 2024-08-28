@@ -114,7 +114,8 @@ public abstract class Contents
     }
     
     //If borrowing, make sure copies are available
-    
+    public void borrow(){
+    }
     public void borrowItem()
     {
         if (copies > 0) 
