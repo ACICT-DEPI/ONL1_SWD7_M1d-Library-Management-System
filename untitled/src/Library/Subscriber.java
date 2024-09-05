@@ -31,6 +31,7 @@ class Subscriber {
         this.setPassword(password);
         this.subscriptionStartDate = LocalDate.now();
         this.toReadList = new ArrayList<>();
+        // TODO: write to the file
     }
 
     public Subscriber(String type, String name, String address, String phone,
@@ -88,6 +89,10 @@ class Subscriber {
 
     public String getAddress(){
         return address;
+    }
+
+    public boolean isAdmin() {
+        return "admin".equals(this.type);
     }
 
     private void setAddress(String address){

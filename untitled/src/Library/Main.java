@@ -7,6 +7,7 @@ import java.util.List;
 public class Main {
     private List<Library> allBranches;
     private List<Subscriber> allSubscribers;
+    private int indexOfUser = -1;
 
     public Main() {
         this.allBranches = Library.loadAllBranches();
@@ -27,7 +28,7 @@ public class Main {
                     // Login
                     if (libraryApp.handleLogin(sc)) {
                         System.out.println("Login successful");
-                        libraryApp.directToMainPage(sc);
+                        libraryApp.directToMainPage(sc, libraryApp.allSubscribers.get(libraryApp.indexOfUser));
                     } else {
                         System.out.println("Login unsuccessful. Try to register first or check your password.");
                     }
@@ -42,6 +43,7 @@ public class Main {
                 default -> System.out.println("Invalid option. Please try again.");
             }
         } while ("quit".compareTo(str) != 0);
+        // TODO: save adjusts to files
         System.out.println("Thanks for visiting our library");
     }
 
@@ -55,13 +57,13 @@ public class Main {
         Subscriber foundSubscriber = null;
 
         // Iterate over the list of subscribers to find the one with the matching email
-        for (Subscriber subscriber : allSubscribers) {
-            if (subscriber.getEmail().equalsIgnoreCase(email)) {
-                foundSubscriber = subscriber;
+        for (int i = 0; i < allSubscribers.size(); i++) {// Subscriber subscriber : allSubscribers) {
+            if (allSubscribers.get(i).getEmail().equalsIgnoreCase(email)) {
+                foundSubscriber = allSubscribers.get(i);
+                indexOfUser = i;
                 break;
             }
         }
-
         // Check if a subscriber was found and if the password matches
         if (foundSubscriber != null && foundSubscriber.getPassword().equals(password)) {
             System.out.println("Login successful! Welcome back, " + foundSubscriber.getName());
@@ -84,7 +86,7 @@ public class Main {
         String email = sc.nextLine();
         System.out.print("Enter your password: ");
         String password = sc.nextLine();
-        System.out.print("Enter your type (regular/golden): ");
+        System.out.print("Enter your type (regular/golden): "); // here if admin you have to say admin
         String type = sc.nextLine();
 
         Subscriber subscriber = new Subscriber(type, name, address, phoneNumber, email, password);
@@ -93,9 +95,9 @@ public class Main {
         return true;
     }
 
-    private void directToMainPage(Scanner sc) {
+    private void directToMainPage(Scanner sc, Subscriber subscriber) {
         LibraryView mainPage;
-        boolean isAdmin = checkIfAdmin();
+        boolean isAdmin = subscriber.isAdmin();
         if (isAdmin) {
             mainPage = new AdminMainPage();
         } else {
@@ -109,12 +111,7 @@ public class Main {
             option = sc.nextLine();
             int choice = Integer.parseInt(option);
             mainPage.handleSelection(sc, choice);
-        } while (!option.equals("8"));  // where 4 is the quit option
-    }
-
-    private boolean checkIfAdmin() {
-        // TODO: implement the logic
-        return false;
+        } while (!option.equals("Q"));  // where 8 is the quit option
     }
 }
 

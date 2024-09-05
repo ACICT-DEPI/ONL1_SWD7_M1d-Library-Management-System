@@ -15,7 +15,7 @@ public class AdminMainPage implements LibraryView {
         System.out.println("6. View top 10 most rated contents");
         System.out.println("7. Search");
         System.out.println("7. View borrowing log");
-        System.out.println("8. Logout");
+        System.out.println("Q. Logout");
     }
 
     @Override

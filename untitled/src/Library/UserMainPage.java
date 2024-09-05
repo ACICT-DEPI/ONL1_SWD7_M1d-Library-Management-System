@@ -27,7 +27,7 @@ public class UserMainPage implements LibraryView {
         System.out.println("2. Borrow a book");
         System.out.println("3. Return a book");
         System.out.println("4. Search for content");
-        System.out.println("8. Logout");
+        System.out.println("Q. Logout");
     }
 
     @Override
