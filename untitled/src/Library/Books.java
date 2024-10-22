@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Books extends Contents {
     Books[] books;
     private int sno;
-    private int count;
+    private int count;  // TODO: should be replaced to be copies from Content class
 
     //Constructor
 

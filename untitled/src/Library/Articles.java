@@ -12,7 +12,7 @@ public class Articles extends Contents {
     private String journal;
     private LocalDate publicationDate;
     public List<String> subscribers;
-    public List<Articles> articles;
+    public List<Articles> articles; //  TODO: should be removed but handle it's function first
     
       //Constructor
 
