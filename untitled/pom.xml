@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/3.9.9"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/3.9.9 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Your customized coordinates -->
+    <groupId>com.yasmeen</groupId>
+    <artifactId>library-management-system</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- Add dependencies here -->
+    <dependencies>
+        <!-- JUnit dependency for unit testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+<properties>
+    <maven.compiler.source>14</maven.compiler.source> <!-- Change this to the version you are using -->
+    <maven.compiler.target>14</maven.compiler.target> <!-- Change this to the version you are using -->
+</properties>
+    <build>
+        <plugins>
+            <!-- Maven Surefire Plugin for running tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                  <configuration>
+                <printSummary>true</printSummary>
+            </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
