@@ -102,7 +102,7 @@ public class Library {
     public List<Contents> search(String keyword) {
         List<Contents> results = new ArrayList<>();
         for (Contents content : contentsList) {
-            if (content.matches(keyword)) {  // Assuming Contents has a matches method
+            if (content.matches(keyword) == 0) {
                 results.add(content);
             }
         }

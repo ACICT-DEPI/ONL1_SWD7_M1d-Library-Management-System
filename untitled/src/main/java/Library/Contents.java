@@ -34,48 +34,49 @@ public abstract class Contents
     return itemID;
 }
 
-// Getters for libraryID
-public int getLibraryID() {
-    return libraryID;
-}
+    // Getters for libraryID
+    public int getLibraryID() {
+        return libraryID;
+    }
 
-// Getters for category
-public String getCategory() {
-    return category;
-}
+    // Getters for category
+    public String getCategory() {
+        return category;
+    }
 
 
-// Getters for title
-public String getTitle() {
-    return title;
-}
+    // Getters for title
+    public String getTitle() {
+        return title;
+    }
 
-// Getters for author
-public String getAuthor() {
-    return author;
-}
+    // Getters for author
+    public String getAuthor() {
+        return author;
+    }
 
-// Getters for publisher
-public String getPublisher() {
-    return publisher;
-}
+    // Getters for publisher
+    public String getPublisher() {
+        return publisher;
+    }
 
-// Getters for productionYear
-public int getProductionYear() {
-    return productionYear;
-}
+    // Getters for productionYear
+    public int getProductionYear() {
+        return productionYear;
+    }
 
-// Getters for status
-public String getStatus() {
-    return status;
-}
+    // Getters for status
+    public String getStatus() {
+        return status;
+    }
 
-// Getters for copies
-public int getCopies() {
+    // Getters for copies
+    public int getCopies() {
     return copies;
 }
+
+// Compare function
+    public int matches(String keyWord) {
+        return 0;
+    }
 }
-
-
-
-

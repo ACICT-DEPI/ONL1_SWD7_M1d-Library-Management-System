@@ -8,7 +8,7 @@ class BooksTest {
     @Test
     void testCreateBook() {
         Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
-        assertEquals("1234", book.getISBN());
+        assertEquals(1234, book.getsno());
         assertEquals("Java Programming", book.getTitle());
     }
 
@@ -16,13 +16,13 @@ class BooksTest {
     void testBorrowBook() {
         Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
         assertTrue(book.isAvailable());
-        
+
     }
-    
+
     @Test
     void testReturnBook() {
         Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
-        
+
         assertTrue(book.isAvailable());
     }
 }

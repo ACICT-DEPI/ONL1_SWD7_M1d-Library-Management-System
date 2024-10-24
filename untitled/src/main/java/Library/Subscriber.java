@@ -192,7 +192,7 @@ class Subscriber {
     public static List<Subscriber> loadAllSubscribers() {
         List<Subscriber> subscribers = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("subscribers.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("script.sql"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",", -1); // Split by comma, including empty values
