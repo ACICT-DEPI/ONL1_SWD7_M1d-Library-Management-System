@@ -5,15 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Books extends Contents {
-    Books[] books;
+    public Books[] books;
     private int sno;
-    private int count;  // TODO: should be replaced to be copies from Content class
+    public int count;  // TODO: should be replaced to be copies from Content class
 
     //Constructor
 
     public Books(int itemID, int libraryID, String title, String author, String publisher, int productionYear, String status, int copies,int sno,int count)
     {
-        super(itemID, libraryID, "book", title, author, publisher, productionYear, status, copies );
+        super(itemID, libraryID, title, author, publisher, productionYear, status, copies, 0.0);
         this.sno = sno;
         this.count = count;
     }
