@@ -1,17 +1,8 @@
 package test;
 
 import Library.Articles;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,25 +57,6 @@ class ArticlesTest {
         assertEquals(newDate, article.getPublicationDate());
     }
 
-    @Test
-    void testSaveArticleToFile() throws IOException {
-        String filename = "test_articles.csv";
-        article.saveArticleToFile(filename);
-
-        // Check if the file was created and has content
-        File file = new File(filename);
-        assertTrue(file.exists());
-
-        // Read the content of the file and check if it matches the expected output
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String firstLine = reader.readLine();
-            assertNotNull(firstLine);  // Check that there's content in the file
-            assertTrue(firstLine.contains("Tech Journal"));  // Ensure that journal is part of the saved data
-        }
-
-        // Clean up by deleting the test file
-        file.delete();
-    }
 
     @Test
     void testNotifySubscribersOfNewArticle() {

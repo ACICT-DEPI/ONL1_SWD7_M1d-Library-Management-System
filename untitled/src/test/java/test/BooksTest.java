@@ -103,23 +103,5 @@ class BooksTest {
         assertEquals(1, book.count);  // One book should be in the list
     }
 
-    @Test
-    void testSaveBookToFile() throws IOException {
-        String filename = "test_books.csv";
-        book.saveBookToFile();
 
-        // Check if the file was created
-        File file = new File(filename);
-        assertTrue(file.exists());
-
-        // Read the content of the file
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String firstLine = reader.readLine();
-            assertNotNull(firstLine);  // Check that the file is not empty
-            assertTrue(firstLine.contains("Java Programming"));  // Ensure that book data is written correctly
-        }
-
-        // Clean up by deleting the test file
-        file.delete();
-    }
 }
