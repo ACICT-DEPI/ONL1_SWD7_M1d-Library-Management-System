@@ -1,31 +1,32 @@
 package Library;
 
 
-public abstract class Contents
+public class Contents
 {
     protected int itemID;
     protected int libraryID;
-    protected String category;
     protected String title;
     protected String author;
     protected String publisher;
     protected int productionYear;
     protected String status;
     protected int copies;
+    protected double averageRate;
 
     // Constructor
 
-    public Contents(int itemID, int libraryID, String category, String title, String author, String publisher, int productionYear, String status, int copies)
+    public Contents(int itemID, int libraryID, String title, String author,
+                    String publisher, int productionYear, String status, int copies, double averageRate)
     {
         this.itemID = itemID;
         this.libraryID = libraryID;
-        this.category = category;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.productionYear = productionYear;
         this.status = status;
         this.copies = copies;
+        this.averageRate = averageRate;
 
     }
 
@@ -38,12 +39,6 @@ public abstract class Contents
     public int getLibraryID() {
         return libraryID;
     }
-
-    // Getters for category
-    public String getCategory() {
-        return category;
-    }
-
 
     // Getters for title
     public String getTitle() {

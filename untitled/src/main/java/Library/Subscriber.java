@@ -3,14 +3,15 @@ package Library;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Subscriber {
-    private static int nextId = 0; // TODO: fix the restart error
+public class Subscriber {
     private int id;
     private String type;
     private String name;
@@ -19,10 +20,12 @@ class Subscriber {
     private String s_email;
     private String password;
     private LocalDate subscriptionStartDate;
-    private ArrayList<String> toReadList;
+    private ArrayList<Integer> toReadList;
+    private ArrayList<Integer> read;
+    private ArrayList<Integer> waiting;
 
     public Subscriber(String type, String name, String address, String phone, String s_email, String password) {
-        this.setId();
+        // new subscriber
         this.setType(type);
         this.setName(name);
         this.setAddress(address);
@@ -30,13 +33,16 @@ class Subscriber {
         this.setEmail(s_email);
         this.setPassword(password);
         this.subscriptionStartDate = LocalDate.now();
-        this.toReadList = new ArrayList<>();
-        // TODO: write to the file
+        this.toReadList = new ArrayList<Integer>();
+        this.read = new ArrayList<Integer>();
+        this.waiting = new ArrayList<Integer>();
     }
 
-    public Subscriber(String type, String name, String address, String phone,
-                      String s_email, String password, LocalDate date, ArrayList<String> readList) {
-        this.setId();
+    public Subscriber(int id, String type, String name, String address, String phone,
+                      String s_email, String password, LocalDate date, ArrayList<Integer> to_read_list,
+                      ArrayList<Integer> read, ArrayList<Integer> waiting) {
+        // load subscriber from database
+        this.setId(id);
         this.setType(type);
         this.setName(name);
         this.setAddress(address);
@@ -44,15 +50,17 @@ class Subscriber {
         this.setEmail(s_email);
         this.setPassword(password);
         this.subscriptionStartDate = date;
-        this.toReadList = readList;
+        this.toReadList = to_read_list;
+        this.read = read;
+        this.waiting = waiting;
     }
 
     public int getId(){
         return id;
     }
 
-    private void setId(){
-        this.id = nextId++;
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getType(){
@@ -171,8 +179,8 @@ class Subscriber {
     }
 
     // to read list
-    public void addToReadList(String bookName){
-        toReadList.add(bookName);
+    public void addToReadList(int bookId, String bookName){
+        toReadList.add(bookId);
         System.out.println("\"" + bookName + "\" has been added to your to-read list.");
     }
 
@@ -183,55 +191,68 @@ class Subscriber {
         if(response.equalsIgnoreCase("yes")){
             System.out.println("Enter the name of the book:");
             String bookName = scanner.nextLine();
-            addToReadList(bookName);
+            addToReadList(1, bookName);
         } else {
             System.out.println("No book was added to your to-read list.");
         }
     }
 
-    public static List<Subscriber> loadAllSubscribers() {
+    public static List<Subscriber> loadAllSubscribers() throws SQLException {
         List<Subscriber> subscribers = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("script.sql"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",", -1); // Split by comma, including empty values
-                if (parts.length >= 8) { // Ensure there are enough columns
-                    int id = Integer.parseInt(parts[0].trim());
-                    String type = parts[1].trim();
-                    String name = parts[2].trim();
-                    String address = parts[3].trim();
-                    String phone = parts[4].trim();
-                    String email = parts[5].trim();
-                    String password = parts[6].trim();
-                    LocalDate subscriptionStartDate = LocalDate.parse(parts[7].trim());
-
-                    // Handle multiple-value element (toReadList)
-                    ArrayList<String> toReadList = new ArrayList<>();
-                    if (parts.length > 8) {
-                        String[] toReadItems = parts[8].split(";"); // Assuming ; separates items in the list
-                        for (String item : toReadItems) {
-                            toReadList.add(item.trim());
-                        }
-                    }
-
-                    Subscriber subscriber = new Subscriber(type, name, address, phone, email, password,
-                            subscriptionStartDate, toReadList);
-
-                    // Manually set the ID and update nextId to avoid duplicates
-                    subscriber.id = id;
-                    if (id >= nextId) {
-                        nextId = id + 1;
-                    }
-
-                    subscribers.add(subscriber);
-                } else {
-                    System.out.println("Skipping malformed line: " + line);
+        DBConnection newCon = new DBConnection();
+        ResultSet resultSet = newCon.runQuery("select * from Subscribers");
+        while (resultSet.next()) {
+            int subscriberId = resultSet.getInt("subscriber_id");
+            String fullName = resultSet.getString("full_name");
+            String email = resultSet.getString("email");
+            String password = resultSet.getString("password");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
+            String type = resultSet.getString("type");
+            String address = resultSet.getString("address");
+            String phone = resultSet.getString("phone");
+            // find the subscription start date and if not exist set to null
+            LocalDate startSubscription = null;
+            if (type.equals("Golden")) {
+                // select form subscriptions to find the start date
+                ResultSet subscriptionResultSet = newCon.runQuery(
+                        "SELECT start_date FROM Subscriptions WHERE subscriber_id = " + subscriberId
+                );
+                if (subscriptionResultSet.next()) {
+                    startSubscription = subscriptionResultSet.getDate("start_date").toLocalDate();
                 }
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred while loading subscriber data: " + e.getMessage());
+            // load the to_read_list and the read_list and the waiting_list
+            ArrayList<Integer> read = new ArrayList<Integer>();
+            // loop on the read table
+            ResultSet readListResultSet = newCon.runQuery(
+                    "SELECT book_id FROM ReadList WHERE subscriber_id = " + subscriberId
+            );
+            while (readListResultSet.next()) {
+                read.add(readListResultSet.getInt("book_id"));
+            }
+            ArrayList<Integer> to_read = new ArrayList<Integer>();
+            // loop on the to read table
+            ResultSet toReadListResultSet = newCon.runQuery(
+                    "SELECT book_id FROM ToReadList WHERE subscriber_id = " + subscriberId
+            );
+            while (toReadListResultSet.next()) {
+                to_read.add(toReadListResultSet.getInt("book_id"));
+            }
+
+            ArrayList<Integer> waiting = new ArrayList<Integer>();
+            // loop on the waiting table
+            ResultSet waitingListResultSet = newCon.runQuery(
+                    "SELECT book_id FROM WaitingList WHERE subscriber_id = " + subscriberId
+            );
+            while (waitingListResultSet.next()) {
+                waiting.add(waitingListResultSet.getInt("book_id"));
+            }
+
+            Subscriber ss = new Subscriber(subscriberId, type, fullName, address, phone, email, password,
+                                           startSubscription, read, to_read, waiting);
+            subscribers.add(ss);
         }
+        newCon.Close();
         return subscribers;
     }
 

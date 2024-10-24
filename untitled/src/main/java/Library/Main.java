@@ -1,5 +1,6 @@
 package Library;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.List;
@@ -9,11 +10,11 @@ public class Main {
     private List<Subscriber> allSubscribers;
     private int indexOfUser = -1;
 
-    public Main() {
+    public Main() throws SQLException {
         this.allBranches = Library.loadAllBranches();
         this.allSubscribers = Subscriber.loadAllSubscribers();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // split this main to admin and user
         String str;
         Main libraryApp = new Main();
@@ -95,7 +96,7 @@ public class Main {
         return true;
     }
 
-    private void directToMainPage(Scanner sc, Subscriber subscriber) {
+    private void directToMainPage(Scanner sc, Subscriber subscriber) throws SQLException {
         LibraryView mainPage;
         boolean isAdmin = subscriber.isAdmin();
         if (isAdmin) {

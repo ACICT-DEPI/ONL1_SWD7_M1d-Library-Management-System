@@ -1,5 +1,6 @@
 package Library;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class UserMainPage implements LibraryView {
     }
 
     @Override
-    public void handleSelection(Scanner sc, int choice) {
+    public void handleSelection(Scanner sc, int choice) throws SQLException {
         switch (choice) {
             case 1:
                 System.out.println("Displaying available books...");
@@ -56,7 +57,7 @@ public class UserMainPage implements LibraryView {
         }
     }
 
-    public void performSearch(Scanner sc) {
+    public void performSearch(Scanner sc) throws SQLException {
         System.out.print("Enter search keyword: ");
         String keyword = sc.nextLine();
 

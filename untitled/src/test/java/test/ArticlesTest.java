@@ -1,6 +1,6 @@
 package test;
 
-import main.java.Library.Articles;
+import Library.Articles;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

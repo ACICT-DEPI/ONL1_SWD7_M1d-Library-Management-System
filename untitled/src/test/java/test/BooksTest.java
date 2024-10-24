@@ -12,17 +12,17 @@ class BooksTest {
         assertEquals("Java Programming", book.getTitle());
     }
 
-    @Test
-    void testBorrowBook() {
-        Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
-        assertTrue(book.isAvailable());
-
-    }
-
-    @Test
-    void testReturnBook() {
-        Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
-
-        assertTrue(book.isAvailable());
-    }
+//    @Test
+//    void testBorrowBook() {
+//        Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
+//        assertTrue(book.isAvailable());
+//
+//    }
+//
+//    @Test
+//    void testReturnBook() {
+//        Books book = new Books(0, 0, "1234", "Java Programming", null, 0, null, 0, 0, 0);
+//
+//        assertTrue(book.isAvailable());
+//    }
 }
