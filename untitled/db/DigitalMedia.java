@@ -1,4 +1,5 @@
-package Library;
+
+package javaapplication٥;
 
 import java.util.*;
 import java.io.BufferedWriter;
@@ -13,68 +14,67 @@ public class DigitalMedia extends Contents {
     public List<Integer> ratings;
     private String description;
     public List<String> comments;
-
-    //Constructor
-    public DigitalMedia(int itemID, int libraryID, String title, String author, String publisher, int productionYear,
-                        String status, int copies, String mediaType, String format, String platform, String description)
+    
+      //Constructor
+    public DigitalMedia(int itemID, int libraryID, String title, String author, String publisher, int productionYear, String status, int copies, String mediaType, String format, int count, String platform)
     {
-        super(itemID, libraryID, title, author, publisher, productionYear, status, copies, 0.0);
+        super(itemID, libraryID, "digital media", title, author, publisher, productionYear, status, copies);
         this.mediaType = mediaType;
         this.format = format;
         this. platform = platform;
         this.description = description;
 
     }
-
-    //Getter for mediaType
+     
+     //Getter for mediaType
     public String getMediaType() {
         return mediaType;
     }
-
-    //Getter for format
+  
+     //Getter for format
     public String getFormat() {
         return format;
     }
 
-    //Getter for platform
+     //Getter for platform
     public String getPlatform() {
         return platform;
     }
 
-
-    //Getter for averageRating
+    
+     //Getter for averageRating
     public double getAverageRating() {
         return averageRating;
     }
 
-    //Getter for description
+     //Getter for description
     public String getDescription() {
         return description;
     }
-
-    //Setter for mediaType
+   
+     //Setter for mediaType
     public void setMediaType(String mediaType) {
         this.mediaType = mediaType;
     }
-
-    //Setter for format
+     
+     //Setter for format
     public void setFormat(String format) {
         this.format = format;
-
+        
     }
-
-    //Setter for platform
+     
+     //Setter for platform
     public void setPlatform(String platform) {
         this.platform = platform;
     }
-
-    //method of rating
+    
+     //method of rating
     public void rate(int rating) {
         this.ratings.add(rating);
         this.calculateAverageRating();
     }
 
-    //method to update the averageRating
+     //method to update the averageRating
     private void calculateAverageRating() {
         if (this.ratings.isEmpty()) {
             this.averageRating = 0; // أو تعيين قيمة افتراضية أخرى
@@ -86,21 +86,21 @@ public class DigitalMedia extends Contents {
         }
         this.averageRating = sum / this.ratings.size();
     }
-
-
+    
+    
     // دالة لإضافة تعليق
     public void addReview(String comment) {
         comments.add(comment);
     }
-
+    
     // دالة لعرض جميع التعليقات
     public void displayComments() {
         for (String comment : comments) {
             System.out.println(comment);
         }
     }
-
-    // دالة لاستخراج ملخص
+    
+     // دالة لاستخراج ملخص
     public String getSummary() {
         // هنا نستخدم خوارزمية لتلخيص النصوص
         // هذا مثال بسيط لاستخراج أول جملتين كملخص
@@ -115,7 +115,7 @@ public class DigitalMedia extends Contents {
             return "لا يوجد وصف متاح.";
         }
     }
-
+    
     // Save DigitalMedia data to a text file
     public void saveDigitalMediaToFile(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
@@ -152,10 +152,10 @@ public class DigitalMedia extends Contents {
             System.out.println("An error occurred while saving DigitalMedia to file: " + e.getMessage());
         }
     }
+    
+   
 
-
-
-    // toString method to provide a string representation of the digital media
+     // toString method to provide a string representation of the digital media
     @Override
     public String toString() {
         return """
@@ -163,3 +163,6 @@ DigitalMedia {
 Item ID: """ + getItemID() +"\nLibrary ID: " + getLibraryID() +"\nTitle: " + getTitle() +"\nAuthor: " + getAuthor() +"\nPublisher: " + getPublisher() +"\nProduction Year: " + getProductionYear() +"\nStatus: " + getStatus() +"\nCopies: " + getCopies() +"\nMedia Type: " + mediaType +"\nFormat: " + format +"\nPlatform: " + platform +"\nAverage Rating: " + averageRating +"\nRatings: " + ratings +"\n}";
     }
 }
+
+    
+

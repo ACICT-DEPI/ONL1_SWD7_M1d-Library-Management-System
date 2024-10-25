@@ -252,7 +252,7 @@ public class Subscriber {
                                            startSubscription, read, to_read, waiting);
             subscribers.add(ss);
         }
-        newCon.Close();
+        DBConnection.Close();
         return subscribers;
     }
 

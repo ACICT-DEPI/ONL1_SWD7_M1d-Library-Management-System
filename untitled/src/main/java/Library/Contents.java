@@ -71,7 +71,12 @@ public class Contents
 }
 
 // Compare function
-    public int matches(String keyWord) {
-        return 0;
+    public int matches(String keyword) {
+        if (keyword == null || keyword.isEmpty()) {
+            return -1;
+        }
+        if (title.toLowerCase().contains(keyword.toLowerCase()))
+            return 0;
+        return -1;
     }
 }

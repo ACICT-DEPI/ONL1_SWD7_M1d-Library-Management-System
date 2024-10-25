@@ -100,9 +100,9 @@ public class Main {
         LibraryView mainPage;
         boolean isAdmin = subscriber.isAdmin();
         if (isAdmin) {
-            mainPage = new AdminMainPage();
+            mainPage = new AdminMainPage(allBranches, subscriber);
         } else {
-            mainPage = new UserMainPage(allBranches);
+            mainPage = new UserMainPage(allBranches, subscriber);
         }
 
         String option;

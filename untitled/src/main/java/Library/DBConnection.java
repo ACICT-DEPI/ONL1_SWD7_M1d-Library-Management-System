@@ -3,21 +3,21 @@ package Library;
 import java.sql.*;
 
 public class DBConnection {
-    private Connection conn;
+    private static Connection conn;
     public DBConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://mysql-2072fc58-tasneemabdeltawab205-075f.j.aivencloud.com:28698/defaultdb?ssl-mode=REQUIRED";
             String user = "avnadmin";
             String pass = "AVNS_UMoxhSatBfdaI4exVWu";
-            this.conn = DriverManager.getConnection(url, user, pass);
+            DBConnection.conn = DriverManager.getConnection(url, user, pass);
         } catch (Exception e) {
             System.out.println("Connection failed");
             System.out.println(e);
         }
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return conn; // Return the established connection
     }
 
@@ -31,8 +31,8 @@ public class DBConnection {
         return statement.executeUpdate(query);
     }
 
-    public void Close() throws SQLException {
-        this.conn.close();
+    public static void Close() throws SQLException {
+        DBConnection.conn.close();
     }
 }
 
